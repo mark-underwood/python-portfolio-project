@@ -11,20 +11,22 @@ def pause():
     """ silent pause before continuing """
     # pylint does not complain 'unused variable' if starts with underscore
     _dump_this = getpass(" [ press enter to continue ]")
+    print('_____________________________')
 
 class Actor(): # superclass
     """ generic actor template """
-    def __init__(self, name, hp_max, ap_max, mp_max, sp_max):
+    def __init__(self, name, stat):
+        # hp_max, ap_max, mp_max, sp_max):
         self.target = None
         self.name = name
-        self.hp = hp_max # health
-        self.hp_max = hp_max
-        self.ap = ap_max # action
-        self.ap_max = ap_max
-        self.mp = mp_max # mana
-        self.mp_max = mp_max
-        self.sp = sp_max # stamina
-        self.sp_max = sp_max
+        self.hp = stat['hp_max'] # health
+        self.hp_max = stat['hp_max']
+        self.ap = stat['ap_max'] # action
+        self.ap_max = stat['ap_max']
+        self.mp = stat['mp_max'] # mana
+        self.mp_max = stat['mp_max']
+        self.sp = stat['sp_max'] # stamina
+        self.sp_max = stat['sp_max']
         self.damage_dealt = 0
 
     def set_target(self, target):
@@ -41,16 +43,25 @@ class Actor(): # superclass
         """ use an item """
         print("use_item stub:", target)
 
+    def show_stats(self):
+        """ show actor stats """
+        print(
+            f"  HEALTH: {self.hp} / {self.hp_max}\n"
+            f"  ACTION: {self.ap} / {self.ap_max}\n"
+            f"    MANA: {self.mp} / {self.mp_max}\n"
+            f" STAMINA: {self.sp} / {self.sp_max}\n"
+        )
+
 class Player(Actor): # subclass
     """ player character subclass """
-    def __init__(self, name, hp_max, ap_max, mp_max, sp_max):
-        super().__init__(name, hp_max, ap_max, mp_max, sp_max)
+    def __init__(self, name, stat):
+        super().__init__(name, stat)
         print(f"{name.capitalize()} has entered the game.")
 
 class NonPlayerCharacter(Actor): # subclass
     """ NPC subclass """
-    def __init__(self, name, hp_max, ap_max, mp_max, sp_max):
-        super().__init__(name, hp_max, ap_max, mp_max, sp_max)
+    def __init__(self, name, stat):
+        super().__init__(name, stat)
         print(f"ENEMY SIGHTED: {name}")
 
 class Combat():
@@ -77,11 +88,12 @@ class Game():
         """ begin running the game """
         print(f"Game start. Difficulty is: {self.difficulty.upper()}") # stub
         
-        self.player = Player('PLAYER',
-            100, # health
-            100, # action
-            100, # mana
-            100) # stamina
+        self.player = Player('PLAYER', {
+            'hp_max': 100, # health
+            'ap_max': 100, # action
+            'mp_max': 100, # mana
+            'sp_max': 100 ## stamina
+            })
 
         print(f"A '{self.difficulty}' game should play",
               f"for {self.rounds_ref[0][self.difficulty]} rounds.")
