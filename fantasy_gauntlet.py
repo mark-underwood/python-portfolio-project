@@ -28,6 +28,12 @@ class Actor(): # superclass
         self.sp = stat['sp_max'] # stamina
         self.sp_max = stat['sp_max']
         self.damage_dealt = 0
+        self.stats_str = (
+            f"  HEALTH: {self.hp} / {self.hp_max}\n"
+            f"  ACTION: {self.ap} / {self.ap_max}\n"
+            f"    MANA: {self.mp} / {self.mp_max}\n"
+            f" STAMINA: {self.sp} / {self.sp_max}\n"
+        )
 
     def set_target(self, target):
         """ set focus target """
@@ -45,12 +51,10 @@ class Actor(): # superclass
 
     def show_stats(self):
         """ show actor stats """
-        print(
-            f"  HEALTH: {self.hp} / {self.hp_max}\n"
-            f"  ACTION: {self.ap} / {self.ap_max}\n"
-            f"    MANA: {self.mp} / {self.mp_max}\n"
-            f" STAMINA: {self.sp} / {self.sp_max}\n"
-        )
+        print(self.stats_str)
+
+    def __str__(self):
+        return self.stats_str
 
 class Player(Actor): # subclass
     """ player character subclass """
