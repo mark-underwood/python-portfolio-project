@@ -90,11 +90,11 @@ class Game():
                 while True:
                     print("\n You found a way to safety. Continue fighting?\n")
                     choice = input("Type 'fight' or 'leave': ")
-                    if choice.lower() == 'fight':
+                    if choice.lower() == 'fight' or choice.lower() == "'fight'":
                         print('StubD) add another queue noded, increase rount_limit, and advance')
                         self.round_limit += 1
                         break
-                    if choice.lower() == 'leave':
+                    if choice.lower() == 'leave' or choice.lower() == "'leave'":
                         print('StubD) Chance at final boss fight here !?')
                         break
                     print("Please type only 'fight' or 'leave'.")
