@@ -1,9 +1,16 @@
 """ ppj """
 
+from getpass import getpass # for hiding user input
+
 # 1 need a queue for enemies to fight
 # 2 generate enemy actors and enqueue
 # 3 enemies will be fought on a first come first serve basis
 # 4 defeated enemies may be added to a linked list and dequeued
+
+def pause():
+    """ silent pause before continuing """
+    # pylint does not complain 'unused variable' if starts with underscore
+    _dump_this = getpass(" [ press enter to continue ]")
 
 class Actor(): # superclass
     """ generic actor template """
@@ -85,19 +92,20 @@ class Game():
             print('StubA) pre-round story/RP')
             print('StubB) combat')
             print('StubC) post combat story/RP')
-            print(f'STUB: Round {self.round_count} OVER')
+            print(f"\n {self.player.name.capitalize()} was victorious!!\n")
+            pause()
             if self.round_count >= self.rounds_ref[0][self.difficulty]:
+                print("\n |\n | You found a way to safety.")
                 while True:
-                    print("\n You found a way to safety. Continue fighting?\n")
-                    choice = input("Type 'fight' or 'leave': ")
-                    if choice.lower() == 'fight' or choice.lower() == "'fight'":
+                    choice = input(" |\n | Continue fighting?\n | \n\nType 'fight' or 'leave': ")
+                    if choice.lower() == 'fight' or choice.lower() == 'more':
                         print('StubD) add another queue noded, increase rount_limit, and advance')
                         self.round_limit += 1
                         break
-                    if choice.lower() == 'leave' or choice.lower() == "'leave'":
+                    if choice.lower() == 'leave' or choice.lower() == 'exit' or choice.lower() == 'q':
                         print('StubD) Chance at final boss fight here !?')
                         break
-                    print("Please type only 'fight' or 'leave'.")
+                    print("Please type either 'fight' or 'leave'.")
             if self.round_count >= self.round_limit:
                 break
         
