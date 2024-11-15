@@ -19,20 +19,17 @@ class Actor(): # superclass
         # hp_max, ap_max, mp_max, sp_max):
         self.target = None
         self.name = name
-        self.hp = stat['hp_max'] # health
-        self.hp_max = stat['hp_max']
-        self.ap = stat['ap_max'] # action
-        self.ap_max = stat['ap_max']
-        self.mp = stat['mp_max'] # mana
-        self.mp_max = stat['mp_max']
-        self.sp = stat['sp_max'] # stamina
-        self.sp_max = stat['sp_max']
-        self.damage_dealt = 0
+        self.stat = stat
+        self.stat['hp'] = stat['hp_max'] # health
+        self.stat['ap'] = stat['ap_max'] # action
+        self.stat['mp'] = stat['mp_max'] # mana
+        self.stat['sp'] = stat['sp_max'] # stamina
+        self.stat['damage_dealt'] = 0
         self.stats_str = (
-            f"  HEALTH: {self.hp} / {self.hp_max}\n"
-            f"  ACTION: {self.ap} / {self.ap_max}\n"
-            f"    MANA: {self.mp} / {self.mp_max}\n"
-            f" STAMINA: {self.sp} / {self.sp_max}\n"
+            f"  HEALTH: {self.stat['hp']} / {self.stat['hp_max']}\n"
+            f"  ACTION: {self.stat['ap']} / {self.stat['ap_max']}\n"
+            f"    MANA: {self.stat['mp']} / {self.stat['mp_max']}\n"
+            f" STAMINA: {self.stat['sp']} / {self.stat['sp_max']}\n"
         )
 
     def set_target(self, target):
@@ -91,7 +88,7 @@ class Game():
     def start(self):
         """ begin running the game """
         print(f"Game start. Difficulty is: {self.difficulty.upper()}") # stub
-        
+
         self.player = Player('PLAYER', {
             'hp_max': 100, # health
             'ap_max': 100, # action
@@ -118,15 +115,15 @@ class Game():
                         print('StubD) add another queue noded, increase rount_limit, and advance')
                         self.round_limit += 1
                         break
-                    if choice.lower() == 'leave' or choice.lower() == 'exit' or choice.lower() == 'q':
+                    if choice.lower() == 'leave' or choice.lower() == 'q':
                         print('StubD) Chance at final boss fight here !?')
                         break
                     print("Please type either 'fight' or 'leave'.")
             if self.round_count >= self.round_limit:
                 break
-        
+
         # post rounds conclusion
-        if self.player.hp <= 0:
+        if self.player.stat['hp'] <= 0:
             # bad endings here
             print("\n GAME OVER\n") # generic game over message
         else:
