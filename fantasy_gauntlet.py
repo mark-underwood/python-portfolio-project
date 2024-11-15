@@ -1,17 +1,11 @@
 """ ppj """
 
-from getpass import getpass # for hiding user input
+from utils_pkg.press_enter import press_enter_to_continue
 
 # 1 need a queue for enemies to fight
 # 2 generate enemy actors and enqueue
 # 3 enemies will be fought on a first come first serve basis
 # 4 defeated enemies may be added to a linked list and dequeued
-
-def pause():
-    """ silent pause before continuing """
-    # pylint does not complain 'unused variable' if starts with underscore
-    _dump_this = getpass(" [ press enter to continue ]")
-    print('_____________________________')
 
 class Actor(): # superclass
     """ generic actor template """
@@ -106,7 +100,7 @@ class Game():
             print('StubB) combat')
             print('StubC) post combat story/RP')
             print(f"\n {self.player.name.capitalize()} was victorious!!\n")
-            pause()
+            press_enter_to_continue()
             if self.round_count >= self.rounds_ref[0][self.difficulty]:
                 print("\n |\n | You found a way to safety.")
                 while True:
