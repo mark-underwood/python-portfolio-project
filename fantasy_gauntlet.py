@@ -36,9 +36,13 @@ class Game():
     """ game """
     def __init__(self, difficulty, name = 'PLAYER', debug = False):
         self.difficulty = difficulty
-        self.name = name
+        self.player = Player(name, {
+            'hp_max': 100, # health
+            'ap_max': 100, # action
+            'mp_max': 100, # mana
+            'sp_max': 100 ## stamina
+            })
         self.debug = debug
-        self.player = None
         self.round_count = 0 # always start at zero
         self.sections = Stack() # saved round states
         self.rounds_ref = ({
@@ -55,13 +59,6 @@ class Game():
         if self.debug:
             print(f"Game start. Difficulty is: {self.difficulty.upper()}") # stub
 
-        self.player = Player(self.name, {
-            'hp_max': 100, # health
-            'ap_max': 100, # action
-            'mp_max': 100, # mana
-            'sp_max': 100 ## stamina
-            })
-
         if self.debug:
             print(f"A '{self.difficulty}' game should play",
               f"for {self.rounds_ref[0][self.difficulty]} rounds.")
@@ -72,7 +69,7 @@ class Game():
             # weapon lottery goes here
 
             if self.player.stat['hp'] <= 0:
-                print('')
+                print(f'{self.player}')
                 break
             print(f"\n {self.player.name.capitalize()} was victorious!!\n")
             press_enter_to_continue()
