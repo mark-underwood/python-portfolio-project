@@ -57,9 +57,7 @@ class Game():
     def start(self):
         """ begin running the game """
         if self.debug:
-            print(f"Game start. Difficulty is: {self.difficulty.upper()}") # stub
-
-        if self.debug:
+            print(f"Game start. Difficulty is: {self.difficulty.upper()}")
             print(f"A '{self.difficulty}' game should play",
               f"for {self.rounds_ref[0][self.difficulty]} rounds.")
 
@@ -68,9 +66,14 @@ class Game():
             print(f'{self.player.name.capitalize()} enters cavern #{self.round_count}.')
             # weapon lottery goes here
 
+            
+            press_enter_to_continue()
+            # combat things!
             if self.player.stat['hp'] <= 0:
-                print(f'{self.player}')
+                print(f'{self.player} was mortally wounded ...')
+                press_enter_to_continue()
                 break
+
             print(f"\n {self.player.name.capitalize()} was victorious!!\n")
             press_enter_to_continue()
             # item lottery goes here
@@ -96,28 +99,40 @@ class Game():
         else:
             # good endings here
             print(f"{self.player.name} met ol' Trusty the horse and rode off into the sunset.")
+        press_enter_to_continue()
 
     def __str__(self):
         return f"Game: {self.difficulty}"
 
-def player_name(name):
+def player_name(old_name):
     """ set player name """
+    min_length = 2
     max_length = 16
+
     while True:
         print('What is your name?\n')
-        new_name = input(f'[Current: {name}]' )
-        if len(new_name) <= max_length:
-            if new_name.isalpha():
-                return new_name
+        new_name = input(f'[Current: {old_name}]' )
+
+        if new_name == '': # is_blank default
+            return old_name
+        if len(new_name) > max_length: # max len
+            print(f"Name must not be more than {max_length} characters.")
+            continue
+        if len(new_name) < min_length: # min len
+            print(f'Name should be at least {min_length} characters.')
+            continue
+        if not new_name.isalpha(): # alpha check
             print('Enter only letters.')
-        else:
-            print(f"Name must be {max_length} characters or less.")
+            continue
+        return new_name
 
 def main():
     """ main menu """
     game_title = 'FANTASY GAUNTLET PythonPPJ'
     print("You woke up in a dimly-lit cave near flowing water.\n")
     name = player_name('iDontKnow')
+    debug = False
+    difficulty = 'normal'
 
     while True:
         # main menu loop
@@ -135,6 +150,14 @@ def main():
             difficulty = 'hard'
         elif choice == '3':
             difficulty = 'nightmare'
+        elif choice.lower() == 'debug':
+            #debug = True if (debug is False) else False
+            if debug is False:
+                debug = True
+                print('Debug mode enabled.')
+            else:
+                debug = False
+                print('Debug mode disabled.')
         elif choice.lower() == 'exit' or choice.lower() == 'quit' or choice.lower() == 'q':
             print("Exiting ...")
             return
