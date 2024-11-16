@@ -6,4 +6,4 @@ class Player(Actor): # subclass
     """ player character subclass """
     def __init__(self, name, stat):
         super().__init__(name, stat)
-        print(f"{name.capitalize()} awakens in a wet dimly-lit cavern.")
+        print("You stand up and see more light in one direction. ")

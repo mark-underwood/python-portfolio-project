@@ -3,6 +3,7 @@
 from actor_pkg.player import Player
 from actor_pkg.npc import NonPlayerCharacter
 from utils_pkg.linked_list import Stack, Queue
+from utils_pkg.player_name import player_name
 from utils_pkg.press_enter import press_enter_to_continue
 
 # 1 need a queue for enemies to fight
@@ -61,24 +62,28 @@ class Game():
             print(f"A '{self.difficulty}' game should play",
               f"for {self.rounds_ref[0][self.difficulty]} rounds.")
 
-        while True: # do rounds
+        # do rounds
+        while True:
             self.round_count += 1 # increment round counter
-            print(f'{self.player.name.capitalize()} enters cavern #{self.round_count}.')
-            # weapon lottery goes here
+            print(f'\nYou enter cavern #{self.round_count}.\n')
 
-            
+            print('STUB: Pre-combat looting.') # weapon lottery goes here
+            print('\nSTUB: You found some weapons! Choose one.\n')
             press_enter_to_continue()
-            # combat things!
+
+            print('STUB: Combat things!') # combat things!
             if self.player.stat['hp'] <= 0:
-                print(f'{self.player} was mortally wounded ...')
+                print('You were mortally wounded ...')
                 press_enter_to_continue()
                 break
 
-            print(f"\n {self.player.name.capitalize()} was victorious!!\n")
+            print("\n You were victorious!!\n")
             press_enter_to_continue()
+
             # item lottery goes here
+
             if self.round_count >= self.rounds_ref[0][self.difficulty]: # stop at round limit
-                print("\n |\n | You found a way to safety.")
+                print(f"\n |\n | {self.player.name} found a way to safety.")
                 while True:
                     choice = input(" |\n | Continue fighting?\n | \n\nType 'fight' or 'leave': ")
                     if choice.lower() == 'fight' or choice.lower() == 'more':
@@ -92,45 +97,27 @@ class Game():
             if self.round_count >= self.round_limit:
                 break
 
-        # post rounds conclusion
+        # conclusion
         if self.player.stat['hp'] <= 0:
             # bad endings here
             print("\n GAME OVER\n") # generic game over message
         else:
             # good endings here
-            print(f"{self.player.name} met ol' Trusty the horse and rode off into the sunset.")
+            if self.player.name.lower() == 'you':
+                print("\nYou woke up ...\n\n ... and remembered who you are.\n")
+            else:
+                print(f"\n{self.player.name} met ol' Trusty the horse and rode off into the sunset.\n")
         press_enter_to_continue()
 
     def __str__(self):
         return f"Game: {self.difficulty}"
 
-def player_name(old_name):
-    """ set player name """
-    min_length = 2
-    max_length = 16
-
-    while True:
-        print('What is your name?\n')
-        new_name = input(f'[ Current: {old_name} ]' )
-
-        if new_name == '': # is_blank default
-            return old_name
-        if len(new_name) > max_length: # max len
-            print(f"Name must not be more than {max_length} characters.")
-            continue
-        if len(new_name) < min_length: # min len
-            print(f'Name should be at least {min_length} characters.')
-            continue
-        if not new_name.isalpha(): # alpha check
-            print('Enter only letters.')
-            continue
-        return new_name
-
 def main():
     """ main menu """
     game_title = 'FANTASY GAUNTLET PythonPPJ'
     print("You woke up in a dimly-lit cave near flowing water.\n")
-    name = player_name('iDontKnow')
+    name = player_name()
+    press_enter_to_continue()
     debug = False
     difficulty = 'normal'
 
@@ -138,17 +125,20 @@ def main():
         # main menu loop
         print(f'\n |\n | {game_title}\n-|===============================>'+
         '\n | MAIN MENU\n |\n')
-        print("1) Start NORMAL\n"+
-              "2) Start HARD\n"+
-              "3) Start NIGHTMARE\n"+
+        print("1) Start EASY\n"+
+              "2) Start NORMAL\n"+
+              "3) Start HARD\n"+
+              "4) Start NIGHTMARE\n"+
               "Q) Quit\n")
         choice = input("Select an option (# or Q): ")
 
-        if choice == '1':
-            difficulty = 'normal'
+        if choice == '' or choice == '1': # default
+            difficulty = 'easy'
         elif choice == '2':
-            difficulty = 'hard'
+            difficulty = 'normal'
         elif choice == '3':
+            difficulty = 'hard'
+        elif choice == '4':
             difficulty = 'nightmare'
         elif choice.lower() == 'debug':
             if debug is False:
