@@ -111,7 +111,7 @@ def player_name(old_name):
 
     while True:
         print('What is your name?\n')
-        new_name = input(f'[Current: {old_name}]' )
+        new_name = input(f'[ Current: {old_name} ]' )
 
         if new_name == '': # is_blank default
             return old_name
@@ -151,19 +151,19 @@ def main():
         elif choice == '3':
             difficulty = 'nightmare'
         elif choice.lower() == 'debug':
-            #debug = True if (debug is False) else False
             if debug is False:
                 debug = True
                 print('Debug mode enabled.')
             else:
                 debug = False
                 print('Debug mode disabled.')
+            continue
         elif choice.lower() == 'exit' or choice.lower() == 'quit' or choice.lower() == 'q':
             print("Exiting ...")
-            return
+            return # quit
         else:
             print(f"\n Choice '{choice if (len(choice) <= 32) else '???'}' is not available.\n")
-            continue
+            continue # invalid
 
         current_game = Game(difficulty, name) # setup
         current_game.start() # begin
