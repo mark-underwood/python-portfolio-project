@@ -40,6 +40,7 @@ class Game():
         self.debug = debug
         self.player = None
         self.round_count = 0 # always start at zero
+        self.sections = Stack() # saved round states
         self.rounds_ref = ({
             'easy': 1,
             'normal': 3,
@@ -107,7 +108,7 @@ def player_name(name):
     max_length = 16
     while True:
         print('What is your name?\n')
-        new_name = input(f'[Current:{name}]' )
+        new_name = input(f'[Current: {name}]' )
         if len(new_name) <= max_length:
             if new_name.isalpha():
                 return new_name
@@ -119,7 +120,8 @@ def main():
     """ main menu """
     game_title = 'FANTASY GAUNTLET PythonPPJ'
     print("You woke up in a dimly-lit cave near flowing water.\n")
-    name = player_name('PLAYER')
+    name = player_name('iDontKnow')
+
     while True:
         # main menu loop
         print(f'\n |\n | {game_title}\n-|===============================>'+
@@ -142,6 +144,7 @@ def main():
         else:
             print(f"\n Choice '{choice if (len(choice) <= 32) else '???'}' is not available.\n")
             continue
+
         current_game = Game(difficulty, name) # setup
         current_game.start() # begin
 
