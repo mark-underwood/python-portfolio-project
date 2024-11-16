@@ -8,7 +8,7 @@ class Actor(): # superclass
         self.name = name
         self.stat = stat
         self.stat['hp'] = stat['hp_max'] # health
-        self.stat['ap'] = stat['ap_max'] # action
+        self.stat['ap'] = 0 # action ; start not ready
         self.stat['mp'] = stat['mp_max'] # mana
         self.stat['sp'] = stat['sp_max'] # stamina
         self.stat['damage_dealt'] = 0
