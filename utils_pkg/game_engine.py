@@ -1,8 +1,9 @@
 """ game engine """
 
 from actor_pkg.player import Player
-from actor_pkg.npc import NonPlayerCharacter
-from utils_pkg.linked_list import Stack, Queue
+# from actor_pkg.npc import NonPlayerCharacter
+from utils_pkg.linked_list import Stack
+# from utils_pkg.linked_list import Queue
 from utils_pkg.press_enter import press_enter_to_continue
 
 class Game():
