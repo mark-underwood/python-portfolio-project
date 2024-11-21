@@ -83,32 +83,11 @@ class Actor(): # superclass
         print(f"Validated {val_count} of {len(self.valid_stats)} "+
               f"stats exist for actor_id: {self.actor_id}")
 
-    def validate_key(self, key = None):
-        """ validate a stat KEY """
-
-        if key is not None:
-            valid_key = bool(isinstance(key, str)) # True if a string
-            if not valid_key:
-                print(f"ERROR: key '{key}' is not a str")
-            return valid_key
-        print('ERROR: key argument is required.')
-        return None
-
-    def validate_value(self, value = None):
-        """ validate a stat VALUE """
-
-        if value is not None:
-            valid_value = bool(isinstance(value, int)) # True if an int
-            if not valid_value:
-                print(f"ERROR: key '{value}' is not a str")
-            return valid_value
-        print('ERROR: value argument is required.')
-        return None
-
     def get_stat(self, key): # type(key) must be str
         """ get a single stat """
 
-        if not self.validate_key(key):
+        if not isinstance(key, str):
+            print(f"Stat keys must be a string: {key}")
             return False
         stats = tuple(self.stat)
         if not stats.count(key): # does key exist?
@@ -116,12 +95,11 @@ class Actor(): # superclass
             return False
         return self.stat[key]
 
-    def set_stat(self, key, value = None):
+    def set_stat(self, key = None, value = None):
         """ get or set a single stat """
 
-        if not self.validate_value(value):
-            return
-        if not self.validate_key(key):
+        if not isinstance(value, int) or not isinstance(key, str):
+            print(f"{key}:{value} must be of type str:int.")
             return
         old_value = self.get_stat(key) # false if key does not exist
         if old_value is False: # check if false
@@ -132,4 +110,4 @@ class Actor(): # superclass
         return
 
     def __str__(self):
-        return self.info_str
+        return f"Actor name: {self.name}, actor_id: {self.actor_id}"
