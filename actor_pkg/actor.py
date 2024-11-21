@@ -7,7 +7,7 @@ class Actor(): # superclass
     def __init__(self, name, stat):
         # stat = {"hp_max":100, "mp_max":100, "sp_max":100}):
         self.target = None
-        self.actor_id = None
+        self.actor_id = None # set in subclass
         self.name = name
         # add stats to validate here:
         self.valid_stats = ("hp", "hp_max", "ap", "ap_max",
@@ -23,18 +23,18 @@ class Actor(): # superclass
         self.stat['damage_dealt'] = 0
         self.info_str = (
             f"CURRENT TARGET OF '{self.name}' IS: {self.target}\n"
-            f"  HEALTH: {self.stat['hp']} / {self.stat['hp_max']}\n"
-            f"  ACTION: {self.stat['ap']} / {self.stat['ap_max']}\n"
-            f"    MANA: {self.stat['mp']} / {self.stat['mp_max']}\n"
-            f" STAMINA: {self.stat['sp']} / {self.stat['sp_max']}\n"
+            f"  HEALTH: {self.stat['hp']} / {self.stat['hp_max']} HP\n"
+            f"  ACTION: {self.stat['ap']} / {self.stat['ap_max']} AP\n"
+            f"    MANA: {self.stat['mp']} / {self.stat['mp_max']} MP\n"
+            f" STAMINA: {self.stat['sp']} / {self.stat['sp_max']} SP\n"
         )
 
-    def set_target(self, target):
+    def set_target(self, target = None): # no target disengages
         """ set focus target """
 
         # need target and datatype validation
-        self.target = target # WIP
-        print("Set target:", self.target)
+        self.target = target
+        print(self.name.capitalize(), "changed target to", self.target)
 
     def use_weapon(self): # attack queue based on action points budget?
         """ attack target with weapon """
