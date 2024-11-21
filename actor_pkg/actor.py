@@ -21,7 +21,7 @@ class Actor(): # superclass
         self.stat['mp'] = stat['mp_max'] # mana
         self.stat['sp'] = stat['sp_max'] # stamina
         self.stat['damage_dealt'] = 0
-        self.stats_str = (
+        self.info_str = (
             f"CURRENT TARGET OF '{self.name}' IS: {self.target}\n"
             f"  HEALTH: {self.stat['hp']} / {self.stat['hp_max']}\n"
             f"  ACTION: {self.stat['ap']} / {self.stat['ap_max']}\n"
@@ -59,14 +59,14 @@ class Actor(): # superclass
         #     error?
 
 
-    def info(self):
-        """ show all actor info """
+    def show_stats(self):
+        """ show all actor stats """
         print(f"Actor_id: {self.actor_id}, Name: {self.name.capitalize()}, Stats:\n", self.stat)
 
-    def show_stats(self):
-        """ show pretty actor stats """
+    def info(self):
+        """ show pretty actor info card """
 
-        print(self.stats_str)
+        print(self.info_str)
 
     def validate_stats(self):
         """ show missing actor stats """
@@ -132,4 +132,4 @@ class Actor(): # superclass
         return
 
     def __str__(self):
-        return self.stats_str
+        return self.info_str
