@@ -11,9 +11,9 @@ class NonPlayerCharacter(Actor): # subclass
         self.new_id()
 
         if is_player_faction: # enemy unless otherwise stated
-            print(f"An ally {self.name} has joined you!")
+            print(f"An ally, {self.name.capitalize()}, has joined you!")
         else:
-            print(f"ENEMY SIGHTED: {self.name}")
+            print(f"ENEMY SIGHTED: {self.name.upper()}")
 
     def new_id(self):
         """ generate actor id """

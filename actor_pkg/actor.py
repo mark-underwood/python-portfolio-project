@@ -33,8 +33,19 @@ class Actor(): # superclass
         """ set focus target """
 
         # need target and datatype validation
+        old_target = self.target
         self.target = target
-        print(self.name.capitalize(), "changed target to", self.target)
+        if target is None:
+            print(f"{self.name.capitalize()} stopped targeting {old_target}.")
+        elif self.target is target:
+            print(f"{self.name.capitalize()} changed target to {target}.")
+        else:
+            print("ERROR: failed to change target.")
+
+    def print_target(self):
+        """ print current target """
+
+        print(f"{self.name.capitalize()} is targeting {self.target}.")
 
     def use_weapon(self): # attack queue based on action points budget?
         """ attack target with weapon """
