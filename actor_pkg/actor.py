@@ -80,19 +80,53 @@ class Actor(): # superclass
         print(self.info_str)
 
     def validate_stats(self):
-        """ show missing actor stats """
+        """ check that all valid stat keys exist """
 
-        val_count = 0 # counter
+        val_count = 0 # valid stat counter
+        miss_count = 0 # missing stat counter
+        miss_list = []
         stats = tuple(self.stat) # snapshot current stats
-        for stat in self.valid_stats:
-            if not stats.count(stat): # check snapshot
+        for stat in self.valid_stats: # for each valid stat
+            if not stats.count(stat): # does it not exist in stat?
                 print(self.name.capitalize(),
                     f"(actor_id: {self.actor_id})",
                     f"does not have stat '{stat}'.")
+                miss_count += 1
+                miss_list.append(stat)
                 continue
             val_count += 1 # increment counter
-        print(f"Validated {val_count} of {len(self.valid_stats)} "+
+        print(f"{val_count} of {len(self.valid_stats)} valid "+
               f"stats exist for actor_id: {self.actor_id}")
+        if val_count is len(self.valid_stats):
+            return True
+        print(f"Missing stats: {miss_list}")
+        return False
+
+    def invalidate_stats(self, stats = None):
+        """ check for extraneous stat keys """
+
+        extra_count = 0 # extraneous count
+        extra_list = []
+        if stats is None and isinstance(self.stat, dict): # test current stats?
+            stats = tuple(self.stat) # snapshot current stats
+        for stat in stats:
+            if not self.valid_stats.count(stat): # is stat valid?
+                extra_count += 1
+                extra_list.append(stat)
+        print(f"{extra_count} of {len(self.stat)} stats were invalid.")
+        if extra_count:
+            print(f"Extraneous stats: {extra_list}")
+            return False
+        return True
+
+    def check_stats(self):
+        """ valid and invalid key check """
+
+        if self.validate_stats() and self.invalidate_stats():
+            print('Checks passed succefully.')
+            return True
+        print('One or more checks failed.')
+        return False
 
     def get_stat(self, key): # type(key) must be str
         """ get a single stat """
