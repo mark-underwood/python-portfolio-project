@@ -22,7 +22,7 @@ class Actor(): # superclass
         self.stat['sp'] = stat['sp_max'] # stamina
         self.stat['damage_dealt'] = 0
         self.info_str = (
-            f"CURRENT TARGET OF '{self.name}' IS: {self.target}\n"
+            f"CURRENT TARGET OF '{self.name.capitalize()}' IS: {self.target}\n"
             f"  HEALTH: {self.stat['hp']} / {self.stat['hp_max']} HP\n"
             f"  ACTION: {self.stat['ap']} / {self.stat['ap_max']} AP\n"
             f"    MANA: {self.stat['mp']} / {self.stat['mp_max']} MP\n"
