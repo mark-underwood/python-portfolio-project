@@ -5,8 +5,8 @@ from actor_pkg.actor import Actor
 
 class Player(Actor): # subclass
     """ player character subclass """
-    def __init__(self, name, stat):
-        super().__init__(name, stat)
+    def __init__(self, name, stat, debug = False):
+        super().__init__(name, stat, debug)
         self.new_id()
         if self.name.lower() == "you":
             s = ''
