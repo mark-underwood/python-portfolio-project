@@ -51,7 +51,7 @@ def main():
               "Q) Quit\n")
         choice = input("Select an option (# or Q): ")
 
-        if choice == '' or choice == '1': # default
+        if choice in ('', '1'): # default
             difficulty = 'easy'
         elif choice == '2':
             difficulty = 'normal'
