@@ -40,11 +40,11 @@ class Game():
             self.round_count += 1 # increment round counter
             print(f'\nYou enter cavern #{self.round_count}.\n')
 
-            print('STUB: Pre-combat looting.') # weapon lottery goes here
-            print('\nSTUB: You found some weapons! Choose one.\n')
+            print('STUB: $ Pre-combat looting. $') # weapon lottery goes here
+            print('\nSTUB: $$$ You found some weapons! $$$ Choose one.\n')
             press_enter_to_continue()
 
-            print('STUB: Combat things!') # combat things!
+            print('STUB: /!\\ Combat things!') # combat things!
             if self.player.stat['hp'] <= 0:
                 print('You were mortally wounded ...')
                 press_enter_to_continue()

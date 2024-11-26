@@ -1,5 +1,6 @@
 """ fantasy gauntlet ppj """
 
+import sys
 from utils_pkg.game_engine import Game
 from utils_pkg.player_name import player_name
 from utils_pkg.press_enter import press_enter_to_continue
@@ -8,28 +9,6 @@ from utils_pkg.press_enter import press_enter_to_continue
 # 2 generate enemy actors and enqueue
 # 3 enemies will be fought on a first come first serve basis
 # 4 defeated enemies may be added to a linked list and dequeued
-
-# class ActOne():
-#     """ act one | searching """
-#     def __init__(self):
-#         pass
-
-# class ActTwo():
-#     """ act two | combat """
-#     def __init__(self):
-#         pass
-
-#     def combat(self):
-#         print('combat stub')
-#         while True:
-
-#             break
-#         print(f"\n {self.actor['player'].name.capitalize()} was victorious!!\n")
-
-# class ActThree():
-#     """ act three | victory looting """
-#     def __init__(self, actor):
-#         pass
 
 def main():
     """ main menu """
@@ -69,7 +48,7 @@ def main():
             continue
         elif choice.lower() == 'exit' or choice.lower() == 'quit' or choice.lower() == 'q':
             print("Exiting ...")
-            return # quit
+            sys.exit() # quit
         else:
             print(f"\n Choice '{choice if (len(choice) <= 32) else '???'}' is not available.\n")
             continue # invalid
@@ -77,4 +56,7 @@ def main():
         current_game = Game(difficulty, name) # setup
         current_game.start() # begin
 
-main() # first run
+if not sys.flags.interactive: # do not run immediately if shell is interactive
+    main()
+else:
+    print("\n /!\\ Detected interactive shell.\n\nRun main() to start the game.\n")

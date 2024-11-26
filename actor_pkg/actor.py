@@ -4,15 +4,17 @@
 
 class Actor(): # superclass
     """ generic actor template """
-    def __init__(self, name, stat):
+    def __init__(self, name, stat, debug = False):
         # stat = {"hp_max":100, "mp_max":100, "sp_max":100}):
-        self.target = None
+        self.target = None # set_target()
         self.actor_id = None # set in subclass
         self.name = name
+
         # add stats to validate here:
         self.valid_stats = ("hp", "hp_max", "ap", "ap_max",
                              "mp", "mp_max", "sp", "sp_max",
                              "is_player_faction", 'damage_dealt')
+        # start stat setup
         self.stat = stat
         self.stat["is_player_faction"] = True # friendly by default
         self.stat['hp'] = stat['hp_max'] # health
@@ -21,7 +23,11 @@ class Actor(): # superclass
         self.stat['mp'] = stat['mp_max'] # mana
         self.stat['sp'] = stat['sp_max'] # stamina
         self.stat['damage_dealt'] = 0
-        self.info_str = (
+        # end of init stat updates
+
+        self.check_stats(prune = True, debug = debug) # check stats
+
+        self.info_str = ( # set info string
             f"CURRENT TARGET OF '{self.name.capitalize()}' IS: {self.target}\n"
             f"  HEALTH: {self.stat['hp']} / {self.stat['hp_max']} HP\n"
             f"  ACTION: {self.stat['ap']} / {self.stat['ap_max']} AP\n"
@@ -40,7 +46,7 @@ class Actor(): # superclass
         elif self.target is target:
             print(f"{self.name.capitalize()} changed target to {target}.")
         else:
-            print("ERROR: failed to change target.")
+            print(f"ERROR: '{self.name}' actor # {self.actor_id} failed to change target.")
 
     def print_target(self):
         """ print current target """
@@ -121,6 +127,11 @@ class Actor(): # superclass
                     del self.stat[i] # remove bespoke invalid key
                     if debug and not tuple(self.stat).count(i):
                         print(f"Extra stat '{i}' DELETED.")
+                if prune and stats is not None:
+                    del stats[i] # remove bespoke invalid key
+                    if debug and not tuple(stats).count(i):
+                        print(f"Extra stat '{i}' DELETED.")
+
         if debug:
             print(f"Actor # {self.actor_id}: {extra_count} extra, {len(self.stat)} total stats.")
         if extra_count:
