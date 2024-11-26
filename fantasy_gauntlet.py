@@ -46,7 +46,7 @@ def main():
                 debug = False
                 print('Debug mode disabled.')
             continue
-        elif choice.lower() == 'exit' or choice.lower() == 'quit' or choice.lower() == 'q':
+        elif choice.lower() in ('exit', 'quit', 'q', 'qq', 'qqq'):
             print("Exiting ...")
             sys.exit() # quit
         else:

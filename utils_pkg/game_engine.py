@@ -62,7 +62,7 @@ class Game():
                     if choice.lower() == 'fight' or choice.lower() == 'more':
                         self.round_limit += 1
                         break
-                    if choice.lower() == 'leave' or choice.lower() == 'q':
+                    if choice.lower() in ('leave', 'q', 'qq', 'qqq', 'flee', 'exit'):
                         if self.debug:
                             print('StubD) Chance at final boss fight here !?')
                         break
