@@ -1,5 +1,6 @@
 """ actor """
 
+# from utils_pkg.linked_list import Stack # inventory
 # from utils_pkg.linked_list import Queue # many-target queue
 
 class Actor(): # superclass

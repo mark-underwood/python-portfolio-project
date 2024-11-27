@@ -1,7 +1,7 @@
 """ fantasy gauntlet ppj """
 
 import sys
-from utils_pkg.game_engine import Game
+from core_pkg.game import Game
 from utils_pkg.player_name import player_name
 from utils_pkg.press_enter import press_enter_to_continue
 
@@ -48,15 +48,18 @@ def main():
             continue
         elif choice.lower() in ('exit', 'quit', 'q', 'qq', 'qqq'):
             print("Exiting ...")
-            sys.exit() # quit
+            return # quit
         else:
             print(f"\n Choice '{choice if (len(choice) <= 32) else '???'}' is not available.\n")
             continue # invalid
 
         current_game = Game(difficulty, name) # setup
         current_game.start() # begin
+        del current_game # clean up
 
 if not sys.flags.interactive: # do not run immediately if shell is interactive
-    main()
+    # https://stackoverflow.com/questions/33190444/stop-pydoc-from-running-my-python-program
+    if __name__ == "__main__": # avoids running with programs like pydoc
+        main()
 else:
-    print("\n /!\\ Detected interactive shell.\n\nRun main() to start the game.\n")
+    print("\n /!\\ Detected interactive shell.\n\nCall main() to start the game.\n")

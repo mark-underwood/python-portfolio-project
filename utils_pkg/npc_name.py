@@ -3,7 +3,7 @@
 def check_name(name, debug):
     """ sanity check npc name string """
 
-    limit = (2, 16)
+    limit = (2, 16) # character
 
     if (
         isinstance(name, str) and # is str
@@ -22,7 +22,7 @@ def check_name(name, debug):
             print(f"Name '{name}' has:\n{num_spaces} space(s)"+
                   f"\n{num_invalid} invalid characters.")
 
-        if (num_invalid and # all valid characters
+        if (not num_invalid and # all valid characters
             name[0] != ' ' and # space not at start
             name[-1] != ' ' and # space not at end
             num_spaces <= 1 # max 1 spaces

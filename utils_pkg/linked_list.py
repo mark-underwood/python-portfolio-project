@@ -19,10 +19,15 @@ class Stack:
         """ get size """
         return len(self.items)
 
+    def show_stack(self):
+        """ show stack """
+        print(self.items)
+
+
 class Queue:
     """ FIFO queue with lists """
     def __init__(self):
-        self.items = []
+        self.items = [] # builtin list data type
 
     def size(self):
         """ get size """
@@ -30,13 +35,13 @@ class Queue:
 
     def enqueue(self, item):
         """ new last item """
-        self.items.append(item)
+        self.items.append(item) # builtin append list method
 
     def dequeue(self):
         """ first item out """
         if self.size() == 0:
             return None
-        return self.items.pop(0)
+        return self.items.pop(0) # non-empty list # builtin pop list method
 
     def show_queue(self):
         """ show queue """
