@@ -1,24 +1,27 @@
-""" game engine """
+""" game """
 
 from actor_pkg.player import Player
-# from actor_pkg.npc import NonPlayerCharacter
-from utils_pkg.linked_list import Stack
+from core_pkg.cavern import Cavern
+# from actor_pkg.npc import NonPlayerCharacter as NPC
+# from utils_pkg.linked_list import Stack # inventory
 # from utils_pkg.linked_list import Queue
 from utils_pkg.press_enter import press_enter_to_continue
 
 class Game():
     """ game """
+
     def __init__(self, difficulty, name = 'PLAYER', debug = False):
         self.difficulty = difficulty
-        self.player = Player(name, {
+        self.player = Player(name = name, stat = {
             'hp_max': 100, # health
             'ap_max': 100, # action
             'mp_max': 100, # mana
             'sp_max': 100 ## stamina
             })
+        self.player.location = 0 # player start
         self.debug = debug
         self.round_count = 0 # always start at zero
-        self.sections = Stack() # saved round states
+        self.caverns = [] # persistent locations
         self.rounds_ref = ({
             'easy': 1,
             'normal': 3,
@@ -28,17 +31,69 @@ class Game():
         self.round_limit = self.rounds_ref[0][self.difficulty]
         # generate queue with initial node count = self.rounds_ref[0][difficulty]
 
+    def add_cavern(self):
+        """ add a cavern location """
+
+        self.caverns.append(
+            Cavern( # must be added progressively
+                cavern_id = self.round_count, # pass round count as id (caverns index)
+                difficulty = self.difficulty,
+                debug = self.debug
+                ))
+
+    def nav_menu(self):
+        """ navigation decision menu """
+
+        limit = (1, 3) # (lowest, highest) valid choice
+
+        while True:
+            print("What will you do?",
+                "\n1) Look around",
+                "\n2) Go backwards",
+                "\n3) Go forwards",)
+            choice = input("Enter a number: ")
+            if not (len(choice) == 1 and choice.isnumeric):
+                print("Enter only one number.")
+                continue # one numeric character
+            if not limit[0] <= int(choice) <= limit[1]:
+                print(f"Enter a number from {limit[0]} to {limit[1]}")
+                continue # out of range
+            if choice == '1':
+                self.caverns[self.player.location].observe()
+                continue # no location change
+            if choice == '2':
+                if self.player.back():
+                    break # can go back
+                continue # ask again if can't go back
+            if choice == '3':
+                self.player.next()
+                break # can always go forward
+            print("ERROR: infinite loop prevention.")
+            break # insurance
+
     def start(self):
         """ begin running the game """
+
         if self.debug:
             print(f"Game start. Difficulty is: {self.difficulty.upper()}")
             print(f"A '{self.difficulty}' game should play",
               f"for {self.rounds_ref[0][self.difficulty]} rounds.")
 
+        self.add_cavern() # origin
+
         # do rounds
         while True:
-            self.round_count += 1 # increment round counter
-            print(f'\nYou enter cavern #{self.round_count}.\n')
+            # "Entrance to cavern" if origin, no enemies. Maybe an ally.
+            # Decision menu for current cavern:
+            #    1) Search
+            #    2) Move to next
+            self.caverns[self.player.location].observe()
+
+            press_enter_to_continue()
+
+            if self.player.location is self.round_count:
+                self.round_count += 1 # increment round counter
+                self.player.next()
 
             print('STUB: $ Pre-combat looting. $') # weapon lottery goes here
             print('\nSTUB: $$$ You found some weapons! $$$ Choose one.\n')
