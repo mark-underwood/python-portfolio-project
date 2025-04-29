@@ -23,13 +23,6 @@ class Game():
         self.debug = debug
         self.round_count = 0 # always start at zero
         self.caverns = [] # persistent locations
-        self.caverns.append(
-            Cavern(
-                cavern_id = self.round_count,
-                name = "Entry Alcove",
-                difficulty = self.difficulty,
-                debug = self.debug
-            )) # location zero
         self.rounds_ref = ({
             'easy': 1,
             'normal': 3,
@@ -83,11 +76,18 @@ class Game():
         """ begin running the game """
 
         if self.debug:
-            print(f"Game start. Difficulty is: {self.difficulty.upper()}")
-            print(f"A '{self.difficulty}' game should play",
+            print(f"DEBUG: Game start. Difficulty is: {self.difficulty.upper()}")
+            print(f"DEBUG: A '{self.difficulty}' game should play",
               f"for {self.rounds_ref[0][self.difficulty]} rounds.")
 
-        self.add_cavern() # origin
+        # origin cave
+        self.caverns.append(
+            Cavern(
+                cavern_id = self.round_count,
+                name = "Entry Alcove",
+                difficulty = self.difficulty,
+                debug = self.debug
+            ))
 
         # do rounds
         while True:
@@ -95,13 +95,21 @@ class Game():
             # Decision menu for current cavern:
             #    1) Search
             #    2) Move to next
-            self.caverns[self.player.location].observe()
-
-            press_enter_to_continue()
 
             if self.player.location is self.round_count:
                 self.round_count += 1 # increment round counter
-                self.player.next()
+                self.player.next() # move to next cavern
+                if self.debug:
+                    print('DEBUG: Player location:', self.player.location)
+                    print('DEBUG: Caverns length:', len(self.caverns))
+                    for cavern in self.caverns:
+                        print(f'{cavern.name} #{cavern.cavern_id}', end = ' ')
+                    print()
+                if self.player.location > len(self.caverns) - 1:
+                    self.add_cavern()
+
+            self.caverns[self.player.location].observe()
+            press_enter_to_continue()
 
             print('STUB: $ Pre-combat looting. $') # weapon lottery goes here
             print('\nSTUB: $$$ You found some weapons! $$$ Choose one.\n')

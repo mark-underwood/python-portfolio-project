@@ -52,15 +52,15 @@ class Cavern():
             print("\n"+string_1)
             time.sleep(len(string_1)/denominator)
             if self.debug:
-                print(len(string_1)/denominator, 'seconds')
+                print('DEBUG: Paused for', len(string_1)/denominator, 'seconds')
             print("\n"+string_2)
             time.sleep(len(string_2)/denominator)
             if self.debug:
-                print(len(string_2)/denominator, 'seconds')
+                print('DEBUG: Paused for', len(string_2)/denominator, 'seconds')
             print("\n"+string_3)
             time.sleep(len(string_3)/denominator)
             if self.debug:
-                print(len(string_3)/denominator, 'seconds')
+                print('DEBUG: Paused for', len(string_3)/denominator, 'seconds')
             return
 
         print(f"Cavern #{self.cavern_id} is fairly large.")
