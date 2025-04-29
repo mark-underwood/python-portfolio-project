@@ -53,7 +53,7 @@ def main():
             print(f"\n Choice '{choice if (len(choice) <= 32) else '???'}' is not available.\n")
             continue # invalid
 
-        current_game = Game(difficulty, name) # setup
+        current_game = Game(difficulty, name, debug) # setup
         current_game.start() # begin
         del current_game # clean up
 

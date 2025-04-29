@@ -1,5 +1,6 @@
 """ game """
 
+import time
 from actor_pkg.player import Player
 from core_pkg.cavern import Cavern
 # from actor_pkg.npc import NonPlayerCharacter as NPC
@@ -22,6 +23,13 @@ class Game():
         self.debug = debug
         self.round_count = 0 # always start at zero
         self.caverns = [] # persistent locations
+        self.caverns.append(
+            Cavern(
+                cavern_id = self.round_count,
+                name = "Entry Alcove",
+                difficulty = self.difficulty,
+                debug = self.debug
+            )) # location zero
         self.rounds_ref = ({
             'easy': 1,
             'normal': 3,

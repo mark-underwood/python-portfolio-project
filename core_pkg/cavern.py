@@ -12,6 +12,8 @@ class Cavern():
         self.difficulty = difficulty
         self.debug = debug
         self.inventory = Stack() # inventory class for randomness?
+        if debug:
+            print(f'DEBUG: Discovered cavern "{self.name}". ID#{self.cavern_id}')
 
     def show_inv(self):
         """ show lootable items """
