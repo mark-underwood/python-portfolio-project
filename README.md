@@ -1,6 +1,8 @@
-## Python Portfolio Project
+# Python Portfolio Project
 
-# by Mark Underwood
+by Mark Underwood
+
+## Installation:
 
 From the python-portfolio-project directory, run:
 
