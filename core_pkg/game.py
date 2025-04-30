@@ -12,12 +12,15 @@ class Game():
 
     def __init__(self, difficulty, name = 'PLAYER', debug = False):
         self.difficulty = difficulty
-        self.player = Player(name = name, stat = {
-            'hp_max': 100, # health
-            'ap_max': 100, # action
-            'mp_max': 100, # mana
-            'sp_max': 100 ## stamina
-            })
+        self.player = Player(
+            name = name,
+            stat = {
+                'hp_max': 100, # health
+                'ap_max': 100, # action
+                'mp_max': 100, # mana
+                'sp_max': 100 ## stamina
+            },
+            debug = debug)
         self.player.location = 0 # player start
         self.debug = debug
         self.round_count = 0 # always start at zero
