@@ -1,4 +1,4 @@
-"""actor"""
+"""Generic actor superclass."""
 
 # from utils_pkg.linked_list import Stack # inventory
 # from utils_pkg.linked_list import Queue # many-target queue
@@ -25,8 +25,10 @@ class Actor(): # superclass
         self.stat['sp'] = stat['sp_max'] # stamina
         self.stat['damage_dealt'] = 0
         # end of init stat updates
+        
+        self.debug = debug
 
-        self.check_stats(prune = True, debug = debug) # check stats
+        self.check_stats(prune = True) # check stats
 
         self.info_str = ( # set info string
             f"CURRENT TARGET OF '{self.name.capitalize()}' IS: {self.target}\n"
@@ -86,7 +88,7 @@ class Actor(): # superclass
 
         print(self.info_str)
 
-    def validate_stats(self, *, debug = True): # keyword-only for consistency
+    def validate_stats(self): # keyword-only for consistency
         """check that all valid stat keys exist"""
 
         val_count = 0 # valid stat counter
@@ -95,7 +97,7 @@ class Actor(): # superclass
         stats = tuple(self.stat) # snapshot current stats
         for stat in self.valid_stats: # for each valid stat
             if not stats.count(stat): # does it not exist in stat?
-                if debug:
+                if self.debug:
                     print(self.name.capitalize(),
                     f"(actor_id: {self.actor_id})",
                     f"does not have stat '{stat}'.")
@@ -103,15 +105,15 @@ class Actor(): # superclass
                 miss_list.append(stat)
                 continue
             val_count += 1 # increment counter
-        if debug:
+        if self.debug:
             print(f"Actor # {self.actor_id}: {val_count} of {len(self.valid_stats)} valid stats.")
         if val_count is len(self.valid_stats):
             return True
-        if debug:
+        if self.debug:
             print(f"Missing stats: {miss_list}")
         return False
 
-    def invalidate_stats(self, *, stats = None, prune = True, debug = True): # keyword-only
+    def invalidate_stats(self, *, stats = None, prune = True): # keyword-only
         """check for extraneous stat keys"""
 
         extra_count = 0 # extraneous count
@@ -126,37 +128,37 @@ class Actor(): # superclass
                 extra_list.append(i)
                 if prune and stats is None: # only works for current stats
                     del self.stat[i] # remove bespoke invalid key
-                    if debug and not tuple(self.stat).count(i):
+                    if self.debug and not tuple(self.stat).count(i):
                         print(f"Extra stat '{i}' DELETED.")
                 if prune and stats is not None:
                     del stats[i] # remove bespoke invalid key
-                    if debug and not tuple(stats).count(i):
+                    if self.debug and not tuple(stats).count(i):
                         print(f"Extra stat '{i}' DELETED.")
 
-        if debug:
+        if self.debug:
             print(f"Actor # {self.actor_id}: {extra_count} extra, {len(self.stat)} total stats.")
         if extra_count:
-            if debug:
+            if self.debug:
                 print(f"Extraneous stats: {extra_list}")
             return False # no-prune extra stats
         return True # no extra stats
 
-    def check_stats(self, *, prune = False, debug = False): # keyword-only
+    def check_stats(self, *, prune = False): # keyword-only
         """valid and invalid stat key check"""
 
         # first pass
-        if (self.validate_stats(debug = debug) and
-            self.invalidate_stats(prune = prune, debug = debug)):
-            if debug:
+        if (self.validate_stats() and
+            self.invalidate_stats(prune = prune)):
+            if self.debug:
                 print('Checks passed.')
             return True
 
         # second pass checks if prune succeeded if applicable
-        if self.invalidate_stats(prune = False, debug = False):
+        if self.invalidate_stats(prune = False):
             print('Prune successful. Checks passed.')
             return True
 
-        if debug:
+        if self.debug:
             print('One or more checks did not succeed.')
         return False
 

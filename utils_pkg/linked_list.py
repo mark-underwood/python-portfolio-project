@@ -1,4 +1,4 @@
-"""linked list"""
+"""Simple linear linked list."""
 
 class Stack:
     """LIFO Stack using lists"""
@@ -25,7 +25,7 @@ class Stack:
 
 
 class Queue:
-    """FIFO queue with lists"""
+    """FIFO queue with lists."""
     def __init__(self):
         self.items = [] # builtin list data type
 

@@ -1,10 +1,10 @@
-"""cavern"""
+"""Location template for caverns."""
 
-from core_pkg.dialog import say
+from utils_pkg.dialog import say
 from utils_pkg.linked_list import Stack # location inventory -> lootables
 
 class Cavern():
-    """cavern class"""
+    """Cavern class."""
 
     def __init__(self, cavern_id = None, name = "Unknown", difficulty = 'normal', debug = False):
         self.cavern_id = cavern_id
@@ -12,7 +12,7 @@ class Cavern():
         self.difficulty = difficulty
         self.debug = debug
         self.inventory = Stack() # inventory class for randomness?
-        if debug:
+        if self.debug:
             print(f'DEBUG: Discovered cavern "{self.name}". ID#{self.cavern_id}')
 
     def show_inv(self):

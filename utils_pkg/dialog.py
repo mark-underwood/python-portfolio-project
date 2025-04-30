@@ -1,9 +1,9 @@
-"""Dramatic and cinematic dialog printing"""
+"""Dramatic and cinematic dialog printing."""
 
 import time
 
 def say(msg = None, rate = 20, debug = False):
-    """Say a string and wait based on length"""
+    """Say a string and wait based on length."""
 
     # string type check
     if not isinstance(msg, str):

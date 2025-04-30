@@ -1,4 +1,4 @@
-"""non player character subclass"""
+"""Non player character subclass."""
 
 import random
 from actor_pkg.actor import Actor

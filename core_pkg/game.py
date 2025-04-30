@@ -1,4 +1,4 @@
-"""game"""
+"""Post-menu core game loop."""
 
 from actor_pkg.player import Player
 from core_pkg.cavern import Cavern
@@ -8,7 +8,7 @@ from core_pkg.cavern import Cavern
 from utils_pkg.press_enter import press_enter_to_continue
 
 class Game():
-    """game class"""
+    """Game class."""
 
     def __init__(self, difficulty, name = 'PLAYER', debug = False):
         self.difficulty = difficulty
