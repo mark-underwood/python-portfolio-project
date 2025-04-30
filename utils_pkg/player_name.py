@@ -1,7 +1,7 @@
-""" set player name """
+"""set player name"""
 
 def player_name():
-    """ set player name """
+    """set player name"""
     old_name = 'You'
     min_length = 2
     max_length = 16

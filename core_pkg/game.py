@@ -1,6 +1,5 @@
-""" game """
+"""game"""
 
-import time
 from actor_pkg.player import Player
 from core_pkg.cavern import Cavern
 # from actor_pkg.npc import NonPlayerCharacter as NPC
@@ -9,7 +8,7 @@ from core_pkg.cavern import Cavern
 from utils_pkg.press_enter import press_enter_to_continue
 
 class Game():
-    """ game """
+    """game class"""
 
     def __init__(self, difficulty, name = 'PLAYER', debug = False):
         self.difficulty = difficulty
@@ -33,7 +32,7 @@ class Game():
         # generate queue with initial node count = self.rounds_ref[0][difficulty]
 
     def add_cavern(self):
-        """ add a cavern location """
+        """add a cavern location"""
 
         self.caverns.append(
             Cavern( # must be added progressively
@@ -43,7 +42,7 @@ class Game():
                 ))
 
     def nav_menu(self):
-        """ navigation decision menu """
+        """navigation decision menu"""
 
         limit = (1, 3) # (lowest, highest) valid choice
 
@@ -73,7 +72,7 @@ class Game():
             break # insurance
 
     def start(self):
-        """ begin running the game """
+        """begin running the game"""
 
         if self.debug:
             print(f"DEBUG: Game start. Difficulty is: {self.difficulty.upper()}")

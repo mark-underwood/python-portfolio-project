@@ -1,48 +1,48 @@
-""" linked list """
+"""linked list"""
 
 class Stack:
-    """ LIFO Stack using lists """
+    """LIFO Stack using lists"""
     def __init__(self):
         self.items = [] # builtin list data type
 
     def push(self, value):
-        """ add a new item into the list """
+        """add a new item into the list"""
         self.items.append(value) # builtin append list method
 
     def pop(self):
-        """ remove an item from the list """
+        """remove an item from the list"""
         if len(self.items) == 0: # empty list
             return None
         return self.items.pop() # non-empty list # builtin pop list method
 
     def size(self):
-        """ get size """
+        """get size"""
         return len(self.items)
 
     def show_stack(self):
-        """ show stack """
+        """show stack"""
         print(self.items)
 
 
 class Queue:
-    """ FIFO queue with lists """
+    """FIFO queue with lists"""
     def __init__(self):
         self.items = [] # builtin list data type
 
     def size(self):
-        """ get size """
+        """get size"""
         return len(self.items)
 
     def enqueue(self, item):
-        """ new last item """
+        """new last item"""
         self.items.append(item) # builtin append list method
 
     def dequeue(self):
-        """ first item out """
+        """first item out"""
         if self.size() == 0:
             return None
         return self.items.pop(0) # non-empty list # builtin pop list method
 
     def show_queue(self):
-        """ show queue """
+        """show queue"""
         print(self.items)

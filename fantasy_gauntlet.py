@@ -1,4 +1,4 @@
-""" fantasy gauntlet ppj """
+"""fantasy gauntlet ppj"""
 
 import sys
 from core_pkg.game import Game
@@ -11,7 +11,7 @@ from utils_pkg.press_enter import press_enter_to_continue
 # 4 defeated enemies may be added to a linked list and dequeued
 
 def main():
-    """ main menu """
+    """main menu"""
     game_title = 'FANTASY GAUNTLET PythonPPJ'
     print("You woke up in a dimly-lit cave near flowing water.\n")
     name = player_name()

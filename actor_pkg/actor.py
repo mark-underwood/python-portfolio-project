@@ -1,10 +1,10 @@
-""" actor """
+"""actor"""
 
 # from utils_pkg.linked_list import Stack # inventory
 # from utils_pkg.linked_list import Queue # many-target queue
 
 class Actor(): # superclass
-    """ generic actor template """
+    """generic actor template"""
     def __init__(self, name, stat, debug = False):
         # stat = {"hp_max":100, "mp_max":100, "sp_max":100}):
         self.target = None # set_target()
@@ -37,7 +37,7 @@ class Actor(): # superclass
         )
 
     def set_target(self, target = None): # no target disengages
-        """ set focus target """
+        """set focus target"""
 
         # need target and datatype validation
         old_target = self.target
@@ -50,12 +50,12 @@ class Actor(): # superclass
             print(f"ERROR: '{self.name}' actor # {self.actor_id} failed to change target.")
 
     def print_target(self):
-        """ print current target """
+        """print current target"""
 
         print(f"{self.name.capitalize()} is targeting {self.target}.")
 
     def use_weapon(self): # attack queue based on action points budget?
-        """ attack target with weapon """
+        """attack target with weapon"""
 
         if self.target is None:
             print(f"{self.name.capitalize()} is not targeting anything.")
@@ -66,7 +66,7 @@ class Actor(): # superclass
         print("weapon_attack stub:", self.target)
 
     def use_item(self, target = None):
-        """ use an item """
+        """use an item"""
 
         print("use_item stub:", target)
         # if target == None:
@@ -78,16 +78,16 @@ class Actor(): # superclass
 
 
     def show_stats(self):
-        """ show all actor stats """
+        """show all actor stats"""
         print(f"Actor_id: {self.actor_id}, Name: {self.name.capitalize()}, Stats:\n", self.stat)
 
     def info(self):
-        """ show pretty actor info card """
+        """show pretty actor info card"""
 
         print(self.info_str)
 
     def validate_stats(self, *, debug = True): # keyword-only for consistency
-        """ check that all valid stat keys exist """
+        """check that all valid stat keys exist"""
 
         val_count = 0 # valid stat counter
         miss_count = 0 # missing stat counter
@@ -112,7 +112,7 @@ class Actor(): # superclass
         return False
 
     def invalidate_stats(self, *, stats = None, prune = True, debug = True): # keyword-only
-        """ check for extraneous stat keys """
+        """check for extraneous stat keys"""
 
         extra_count = 0 # extraneous count
         extra_list = []
@@ -142,7 +142,7 @@ class Actor(): # superclass
         return True # no extra stats
 
     def check_stats(self, *, prune = False, debug = False): # keyword-only
-        """ valid and invalid stat key check """
+        """valid and invalid stat key check"""
 
         # first pass
         if (self.validate_stats(debug = debug) and
@@ -161,7 +161,7 @@ class Actor(): # superclass
         return False
 
     def get_stat(self, key): # type(key) must be str
-        """ get a single stat """
+        """get a single stat"""
 
         if not isinstance(key, str):
             print(f"Stat keys must be a string: {key}")
@@ -173,7 +173,7 @@ class Actor(): # superclass
         return self.stat[key]
 
     def set_stat(self, key = None, value = None):
-        """ get or set a single stat """
+        """get or set a single stat"""
 
         if not isinstance(value, int) or not isinstance(key, str):
             print(f"{key}:{value} must be of type str:int.")
