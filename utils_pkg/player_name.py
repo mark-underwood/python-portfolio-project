@@ -28,5 +28,6 @@ def player_name():
         if not new_name.isalpha(): # alpha check # 3rd priority
             print('Enter only letters.')
             continue
+        new_name = new_name.capitalize()
         print(f'\nYou are (?) {new_name}.\n')
         return new_name
