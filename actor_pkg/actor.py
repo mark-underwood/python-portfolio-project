@@ -1,5 +1,6 @@
 """Generic actor superclass."""
 
+from actor_pkg.defaults import valid_stats
 # from utils_pkg.linked_list import Stack # inventory
 # from utils_pkg.linked_list import Queue # many-target queue
 
@@ -12,9 +13,7 @@ class Actor(): # superclass
         self.name = name
 
         # add stats to validate here:
-        self.valid_stats = ("hp", "hp_max", "ap", "ap_max",
-                             "mp", "mp_max", "sp", "sp_max",
-                             "is_player_faction", 'damage_dealt')
+        self.valid_stats = valid_stats()
         # start stat setup
         self.stat = stat
         self.stat["is_player_faction"] = True # friendly by default
@@ -25,10 +24,8 @@ class Actor(): # superclass
         self.stat['sp'] = stat['sp_max'] # stamina
         self.stat['damage_dealt'] = 0
         # end of init stat updates
-        
-        self.debug = debug
 
-        self.check_stats(prune = True) # check stats
+        self.debug = debug
 
         self.info_str = ( # set info string
             f"CURRENT TARGET OF '{self.name.capitalize()}' IS: {self.target}\n"
@@ -77,7 +74,6 @@ class Actor(): # superclass
         #     do_the_thing
         # else:
         #     error?
-
 
     def show_stats(self):
         """show all actor stats"""

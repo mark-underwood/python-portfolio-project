@@ -10,7 +10,8 @@ class NonPlayerCharacter(Actor): # subclass
         super().__init__(name, stat, debug)
         self.stat["is_player_faction"] = is_player_faction # override default
         self.new_id()
-        self.name = check_name(name=name,debug=debug)
+        self.name = check_name(name=name, debug=self.debug)
+        self.check_stats(prune = True) # Actor() method
 
         if is_player_faction: # enemy unless otherwise stated
             print(f"An ally, {self.name.capitalize()}, has joined you!")
@@ -18,7 +19,7 @@ class NonPlayerCharacter(Actor): # subclass
             print(f"ENEMY SIGHTED: {self.name.upper()}")
 
     def new_id(self):
-        """generate actor id"""
+        """generate npc actor id"""
         # run once, while loop ( check if unique -> run again ) # can break targeting
 
         self.actor_id = random.randint(1000, 65535)

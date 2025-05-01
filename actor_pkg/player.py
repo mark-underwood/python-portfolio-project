@@ -9,6 +9,9 @@ class Player(Actor): # subclass
         super().__init__(name, stat, debug)
         self.location = 0 # start at the origin
         self.new_id()
+        self.check_stats(prune = True) # Actor() method
+
+        # naming setup and first message
         if self.name.lower() == "you":
             s = ''
         else:
@@ -17,7 +20,7 @@ class Player(Actor): # subclass
         print(f"\n{self.name.capitalize()} stand{s} up and see{s} more light in one direction. ")
 
     def new_id(self):
-        """generate actor id"""
+        """generate player actor id"""
         # run once, while loop ( check if unique -> run again ) # can break targeting
 
         self.actor_id = random.randint(0, 999)
