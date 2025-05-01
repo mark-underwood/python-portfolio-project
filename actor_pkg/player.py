@@ -13,9 +13,9 @@ class Player(Actor): # subclass
 
         # naming setup and first message
         if self.name.lower() == "you":
-            s = ''
+            s = '' # second person
         else:
-            s = 's'
+            s = 's' # third person
         self.s = s
         print(f"\n{self.name.capitalize()} stand{s} up and see{s} more light in one direction. ")
 
