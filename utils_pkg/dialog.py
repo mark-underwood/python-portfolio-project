@@ -26,7 +26,7 @@ def say(msg = None, rate = 20, debug = False):
     # minimum rate check
     rate = min(rate, len(msg))
 
-    time.sleep(msg/rate) # do the waiting
+    time.sleep(len(msg)/rate) # do the waiting
 
     if debug:
         print('DEBUG: Paused for', len(msg)/rate, 'seconds')
