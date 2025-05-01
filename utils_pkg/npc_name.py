@@ -1,6 +1,6 @@
 """NPC naming utilites."""
 
-def check_name(name, debug):
+def check_name(name, debug = False):
     """Sanity check npc name string."""
 
     limit = (2, 16) # character
