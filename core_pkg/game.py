@@ -1,5 +1,6 @@
 """Post-menu core game loop."""
 
+from actor_pkg.defaults import human_stats
 from actor_pkg.player import Player
 from core_pkg.cavern import Cavern
 # from actor_pkg.npc import NonPlayerCharacter as NPC
@@ -14,12 +15,7 @@ class Game():
         self.difficulty = difficulty
         self.player = Player(
             name = name,
-            stat = {
-                'hp_max': 100, # health
-                'ap_max': 100, # action
-                'mp_max': 100, # mana
-                'sp_max': 100 ## stamina
-            },
+            stat = human_stats(),
             debug = debug)
         self.player.location = 0 # player start
         self.debug = debug
@@ -79,7 +75,7 @@ class Game():
 
         if self.debug:
             print(f"DEBUG: Game start. Difficulty is: {self.difficulty.upper()}")
-            print(f"DEBUG: A '{self.difficulty}' game should play",
+            print(f"DEBUG: '{self.difficulty.capitalize()}' game should play",
               f"for {self.rounds_ref[0][self.difficulty]} rounds.")
 
         # origin cave
