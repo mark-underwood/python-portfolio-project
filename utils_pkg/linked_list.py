@@ -1,7 +1,7 @@
 """Simple linear linked list."""
 
 class Stack:
-    """LIFO Stack using lists"""
+    """LIFO Stack using lists."""
     def __init__(self):
         self.items = [] # builtin list data type
 
