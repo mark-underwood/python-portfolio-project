@@ -11,6 +11,7 @@ class Cavern():
         self.name = name
         self.difficulty = difficulty
         self.debug = debug
+        self.actors = [] # empty array of Actor() objects
         self.inventory = Stack() # inventory class for randomness?
         if self.debug:
             print(f'DEBUG: Discovered cavern "{self.name}". ID#{self.cavern_id}')
