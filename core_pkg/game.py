@@ -3,7 +3,7 @@
 from actor_pkg.defaults import human_stats
 from actor_pkg.player import Player
 from core_pkg.cavern import Cavern
-# from actor_pkg.npc import NonPlayerCharacter as NPC
+from core_pkg.wrap_up import wrap_up
 # from utils_pkg.linked_list import Stack # inventory
 # from utils_pkg.linked_list import Queue
 from utils_pkg.press_enter import press_enter_to_continue
@@ -140,16 +140,7 @@ class Game():
                 break
 
         # conclusion
-        if self.player.stat['hp'] <= 0:
-            # bad endings here
-            print("\n GAME OVER\n") # generic game over message
-        else:
-            # good endings here
-            if self.player.name.lower() == 'you':
-                print("\nYou woke up ...\n\n ... and remembered who you are.\n")
-            else:
-                print(f"\n{self.player.name} met ol' Trusty the horse",
-                      "and rode off into the sunset.\n")
+        wrap_up(self.player)
         press_enter_to_continue()
 
     def __str__(self):
