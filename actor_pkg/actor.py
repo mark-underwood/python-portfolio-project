@@ -1,13 +1,35 @@
 """Generic actor superclass."""
 
+import threading
+import weakref
 from actor_pkg.defaults import valid_stats
 # from utils_pkg.linked_list import Stack # inventory
 # from utils_pkg.linked_list import Queue # many-target queue
 
 class Actor(): # superclass
     """generic actor template"""
+
+    # # solution to removing objects from lists:
+    # https://stackoverflow.com/a/37233282
+    instances = []
+    r_lock = threading.RLock()
+
+    @classmethod
+    def _cleanup_ref(cls, ref):
+        with cls.r_lock:
+            try:
+                cls.instances.remove(ref)
+            except ValueError:
+                pass
+
     def __init__(self, name, stat, debug = False):
         # stat = {"hp_max":100, "mp_max":100, "sp_max":100}):
+
+        # # solution to removing objects from lists:
+        # https://stackoverflow.com/a/37233282
+        with self.r_lock:
+            self.instances.append(weakref.ref(self, self._cleanup_ref))
+
         self.target = None # set_target()
         self.actor_id = None # set in subclass
         self.name = name
