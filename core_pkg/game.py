@@ -3,6 +3,8 @@
 from actor_pkg.defaults import human_stats
 from actor_pkg.player import Player
 from core_pkg.cavern import Cavern
+from core_pkg.weapons import weapon_lottery
+from core_pkg.items import item_lottery
 from core_pkg.wrap_up import wrap_up
 # from utils_pkg.linked_list import Stack # inventory
 # from utils_pkg.linked_list import Queue
@@ -109,9 +111,7 @@ class Game():
             self.caverns[self.player.location].observe()
             press_enter_to_continue()
 
-            print('STUB: $ Pre-combat looting. $') # weapon lottery goes here
-            print('\nSTUB: $$$ You found some weapons! $$$ Choose one.\n')
-            press_enter_to_continue()
+            weapon_lottery() # player found a weapon(?)
 
             print('STUB: /!\\ Combat things!') # combat things!
             if self.player.stat['hp'] <= 0:
@@ -122,7 +122,7 @@ class Game():
             print("\n You were victorious!!\n")
             press_enter_to_continue()
 
-            # item lottery goes here
+            item_lottery() # area clear. scrounge for items
 
             if self.round_count >= self.rounds_ref[0][self.difficulty]: # stop at round limit
                 print(f"\n |\n | {self.player.name} found a way to safety.")
