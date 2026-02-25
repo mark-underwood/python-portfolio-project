@@ -2,10 +2,14 @@
 
 by Mark Underwood
 
-## Installation:
+## How To Play:
 
-From the python-portfolio-project directory, run:
+From the python-portfolio-project directory, run either:
 
-`python fantasy_gauntlet.py`
+1. `python fantasy_gauntlet.py`
+
+or
+
+2. `python .`
 
 to start the game.
